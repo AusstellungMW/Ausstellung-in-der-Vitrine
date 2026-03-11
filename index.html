@@ -13,27 +13,57 @@
       height: 100%;
       background: black;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    video {
+    #player {
       width: 100vw;
       height: 100vh;
       object-fit: contain;
       background: black;
       display: block;
     }
+
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+      text-align: center;
+      cursor: pointer;
+      z-index: 10;
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline preload="auto">
+
+  <div id="overlay">Zum Start tippen</div>
+
+  <video id="player" loop playsinline preload="auto">
     <source src="result_video_fast.mp4" type="video/mp4">
     Ihr Browser unterstützt dieses Video nicht.
   </video>
+
+  <script>
+    const video = document.getElementById("player");
+    const overlay = document.getElementById("overlay");
+
+    overlay.addEventListener("click", async () => {
+      try {
+        video.muted = false;
+        video.volume = 1.0;
+        await video.play();
+        overlay.style.display = "none";
+      } catch (err) {
+        console.error("Start fehlgeschlagen:", err);
+      }
+    });
+  </script>
+
 </body>
 </html>
