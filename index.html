@@ -1,69 +1,115 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Ausstellung in der Vitrine</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8">
 
-    #player {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      background: black;
-      display: block;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 2rem;
-      text-align: center;
-      cursor: pointer;
-      z-index: 10;
-      padding: 20px;
-    }
-  </style>
+<title>Bellerophon auf Pegasus</title>
+
+<style>
+
+html, body {
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+background:black;
+overflow:hidden;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+video {
+width:100vw;
+height:100vh;
+object-fit:contain;
+background:black;
+display:block;
+}
+
+#overlay {
+position:fixed;
+inset:0;
+background-image:url("Start.png");
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+align-items:center;
+z-index:10;
+cursor:pointer;
+}
+
+#title {
+color:white;
+font-size:5vw;
+margin-top:40px;
+text-align:center;
+text-shadow:0 0 15px rgba(0,0,0,0.8);
+}
+
+#hint {
+position:absolute;
+bottom:60px;
+color:white;
+font-size:4vw;
+text-shadow:0 0 15px rgba(0,0,0,0.8);
+}
+
+</style>
+
 </head>
+
 <body>
 
-  <div id="overlay">Zum Start tippen</div>
+<div id="overlay">
 
-  <video id="player" loop playsinline preload="auto">
-    <source src="result_video_fast.mp4" type="video/mp4">
-    Ihr Browser unterstützt dieses Video nicht.
-  </video>
+<div id="title">
+Bellerophon auf Pegasus
+</div>
 
-  <script>
-    const video = document.getElementById("player");
-    const overlay = document.getElementById("overlay");
+<div id="hint">
+Zum Start tippen
+</div>
 
-    overlay.addEventListener("click", async () => {
-      try {
-        video.muted = false;
-        video.volume = 1.0;
-        await video.play();
-        overlay.style.display = "none";
-      } catch (err) {
-        console.error("Start fehlgeschlagen:", err);
-      }
-    });
-  </script>
+</div>
+
+<video id="player" loop playsinline preload="auto">
+
+<source src="result_video_fast.mp4" type="video/mp4">
+
+</video>
+
+<script>
+
+const video = document.getElementById("player");
+const overlay = document.getElementById("overlay");
+
+overlay.addEventListener("click", async () => {
+
+try {
+
+video.muted = false;
+video.volume = 1;
+
+await video.play();
+
+overlay.style.display = "none";
+
+}
+
+catch(err) {
+
+console.log(err);
+
+}
+
+});
+
+</script>
 
 </body>
 </html>
